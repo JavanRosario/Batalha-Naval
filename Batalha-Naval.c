@@ -1,50 +1,63 @@
 #include <stdio.h>
 
-int main(){
-    int index, coluna;
+int main() {
+    // Tabuleiro 10x10, começa todo com água (0)
+    int tabuleiro[10][10] = { {0} };
 
-    // Aqui é o "rótulo" das colunas, de A até J, pra mostrar na tela
-    char linha[10] = {
-        'A','B','C','D','E','F','G','H','I','J'
-    };
+    // Letras para identificar as colunas (A até J)
+    char colunas[10] = {'A','B','C','D','E','F','G','H','I','J'};
 
-    // Essa é a matriz 10x10 toda zerada, que vai ser o "tabuleiro" do jogo
-    int jogo[10][10] = {
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0}
-    };
+    int pode_colocar = 1;
 
-    // Agora, vamos colocar três '3's na linha 1, nas colunas 7, 8 e 9
-    for (coluna = 7; coluna <= 9; coluna++){
-        jogo[1][coluna] = 3;
-    };
-
-    // Aqui a gente coloca três '3's na coluna 2, nas linhas 3, 4 e 5
-    for (index = 3; index <= 5; index++){
-        jogo[index][3] = 3;
+    // ==== NAVIO 1: horizontal na linha 2, colunas F até H ====
+    for (int c = 5; c <= 7; c++) {
+        if (tabuleiro[1][c] != 0) pode_colocar = 0; // Verifica se já tem algo lá
+    }
+    if (pode_colocar) {
+        for (int c = 5; c <= 7; c++)
+            tabuleiro[1][c] = 3; // Coloca o navio
     }
 
-    // Vamos imprimir o cabeçalho com as letras, mostrando as colunas
-    printf("   ");
-    for (index = 0; index < 10; index++){
-        printf(" %c", linha[index]);
-    };
+    // ==== NAVIO 2: vertical na coluna C, linhas 4 até 6 ====
+    pode_colocar = 1;
+    for (int l = 3; l <= 5; l++) {
+        if (tabuleiro[l][2] != 0) pode_colocar = 0;
+    }
+    if (pode_colocar) {
+        for (int l = 3; l <= 5; l++)
+            tabuleiro[l][2] = 3;
+    }
 
-    // Agora vamos imprimir o tabuleiro completo linha por linha
-    for (index = 0; index < 10; index++){
-        // Imprime o número da linha (index+1 pra ficar de 1 a 10)
-        printf("\n%2d  ", index + 1);
-        // Imprime todos os valores daquela linha
-        for (int coluna = 0; coluna < 10; coluna++)
-            printf("%d ", jogo[index][coluna]);
+    // ==== NAVIO 3: diagonal principal de G7 até I9 ====
+    pode_colocar = 1;
+    for (int i = 6; i <= 8; i++) {
+        if (tabuleiro[i][i] != 0) pode_colocar = 0;
+    }
+    if (pode_colocar) {
+        for (int i = 6; i <= 8; i++)
+            tabuleiro[i][i] = 3;
+    }
+
+    // ==== NAVIO 4: diagonal secundária de I2 até G4 ====
+    pode_colocar = 1;
+    for (int i = 0; i < 3; i++) {
+        if (tabuleiro[1 + i][8 - i] != 0) pode_colocar = 0;
+    }
+    if (pode_colocar) {
+        for (int i = 0; i < 3; i++)
+            tabuleiro[1 + i][8 - i] = 3;
+    }
+
+    // ==== MOSTRA O TABULEIRO ====
+    printf("    ");
+    for (int i = 0; i < 10; i++)
+        printf(" %c", colunas[i]); // Cabeçalho com letras
+
+    for (int linha = 0; linha < 10; linha++) {
+        printf("\n%2d  ", linha + 1); // Número da linha
+        for (int coluna = 0; coluna < 10; coluna++) {
+            printf(" %d", tabuleiro[linha][coluna]); // Valor da célula
+        }
     }
     printf("\n");
 
