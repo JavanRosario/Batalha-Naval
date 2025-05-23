@@ -1,39 +1,39 @@
-# Batalha Naval em C
+# Desafio Nível Mestre – Batalha Naval em C
 
-Este é um projeto simples de um tabuleiro do jogo **Batalha Naval**, feito em linguagem C. O programa exibe uma matriz 10x10 representando o campo de batalha, com posições marcadas por números.
+Este projeto é a fase final do desafio de Batalha Naval, com foco em manipulação de matrizes e aplicação de habilidades especiais no tabuleiro do jogo.
 
-## Funcionalidades
+## 🎯 Objetivo
 
-- Impressão do tabuleiro com coordenadas de A–J (colunas) e 1–10 (linhas).
-- Posicionamento de uma embarcação horizontal com valor `3`.
-- Posicionamento de uma embarcação vertical com valor `3`.
+Adicionar **três habilidades especiais** com diferentes áreas de efeito ao tabuleiro do jogo, visualizando as posições afetadas:
 
-## Exemplo de saída
+- 🟢 Cone
+- 🔵 Cruz
+- 🔶 Octaedro
 
-```
-    A B C D E F G H I J
- 1  0 0 0 0 0 0 0 3 3 3
- 2  0 0 0 0 0 0 0 0 0 0
- 3  0 0 3 0 0 0 0 0 0 0
- 4  0 0 3 0 0 0 0 0 0 0
- 5  0 0 3 0 0 0 0 0 0 0
- 6  0 0 0 0 0 0 0 0 0 0
- 7  0 0 0 0 0 0 0 0 0 0
- 8  0 0 0 0 0 0 0 0 0 0
- 9  0 0 0 0 0 0 0 0 0 0
-10  0 0 0 0 0 0 0 0 0 0
-```
+## 📐 Estrutura do Projeto
 
-## Como compilar
+- **Tabuleiro:** 10x10, contendo água (`~`), navios (`N`) e áreas afetadas (`*`)
+- **Matrizes de habilidade:** 5x5 com `1` indicando área afetada
+- **Sobreposição:** A matriz é centralizada num ponto definido no código
 
-No terminal (Linux/macOS) ou PowerShell (Windows):
+## 📌 Como Funciona
+
+- As matrizes são construídas dinamicamente usando `for` com `if`
+- Cada habilidade é aplicada sobre o tabuleiro com checagem de limites
+- O resultado é impresso com `printf`, exibindo o estado final do tabuleiro
+
+## 🔢 Legenda Visual
+
+| Símbolo | Significado          |
+|---------|----------------------|
+| `~`     | Água                 |
+| `N`     | Navio (valor 3)      |
+| `*`     | Área afetada (valor 5) |
+
+## 🚀 Execução
+
+Compile e execute com:
 
 ```bash
-gcc batalha_naval.c -o batalha_naval
-./batalha_naval
-```
-
-## Autor
-
-Javan Oliveira  
-📧 oliveiraajavan@hotmail.com
+gcc main.c -o batalha
+./batalha
